@@ -29,7 +29,7 @@ test('Find an account and update discord credentials', async (t) => {
 });
 
 test('Create a new user', async (t) => {
-  const { db: DB }: any = t.context;
+  const { db: DB }: any = t.context;  
   const user = {
     discord_user_id: '6b38b7f3-0d42-48f4-9529-b72a15c85abb',
     discord_access_token: 'discord_access_token',
@@ -56,6 +56,21 @@ test('Add multiple stellar accounts to user', async (t) => {
     account.data.accounts[0].public_key === 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S' &&
       account.data.accounts[1].public_key === 'GCAB2OXZQLVA7WFLVPO72QSJGHBR6VU5P7SKESI7L7VPMU46GT5UNU5C'
   );
+});
+
+test('Prevent duplicate stellar accounts', async (t) => {
+  const { db: DB }: any = t.context;
+  const user = {
+    discord_user_id: '6b38b7f3-0d42-48f4-9529-b72a15c85abb',
+    discord_access_token: 'discord_access_token',
+    discord_refresh_token: 'discord_refresh_token',
+    discord_expires_at: (Date.now() * 1000).toString()
+  };
+  const account = await AccountBuilder.create({ user, DB });
+  await account.addStellarAccount({ public_key: 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S' });
+  await account.addStellarAccount({ public_key: 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S' });
+
+  t.assert(account.data.accounts[1] === undefined);
 });
 
 test('Add and remove stellar accounts', async (t) => {

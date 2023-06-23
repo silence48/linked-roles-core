@@ -76,7 +76,9 @@ export class AccountBuilder {
   async addStellarAccount({ public_key }: any) {
     const { DB, discord_user_id } = this;
     const key = Keypair.fromPublicKey(public_key).publicKey();
-    if (key) {
+    const exists = await StellarAccount.findOne('public_key', key, DB)
+    
+    if (!exists) {
       const stellarForm = new StellarAccountForm(
         new StellarAccount({
           public_key: key,
@@ -84,8 +86,9 @@ export class AccountBuilder {
         })
       );
       await StellarAccount.create(stellarForm, DB);
-      return await this.build();
     }
+
+    return await this.build();
   }
 
   async removeStellarAccount({ public_key }: any) {
