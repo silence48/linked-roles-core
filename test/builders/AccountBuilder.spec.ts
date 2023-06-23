@@ -17,6 +17,17 @@ test('Find an account by discord_id', async (t) => {
   t.deepEqual(data.user.discord_user_id, 'a5c72090-2dfef25b284a-c2b6-43d6-9eba');
 });
 
+test('Find an account and update discord credentials', async (t) => {
+  const { db: DB }: any = t.context;
+  const account = await AccountBuilder.find({ discord_user_id: 'a5c72090-2dfef25b284a-c2b6-43d6-9eba', DB });
+  await account.updateDiscordCredentials({
+    discord_access_token: 'c2b6_access_token',
+    discord_refresh_token: 'a5c72090_refresh_token',
+    discord_expires_at: (Date.now() * 1000).toString()
+  })
+  t.deepEqual(account.data.user.discord_access_token, 'c2b6_access_token');
+});
+
 test('Create a new user', async (t) => {
   const { db: DB }: any = t.context;
   const user = {

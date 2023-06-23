@@ -60,7 +60,17 @@ export class AccountBuilder {
 
   async updateDiscordCredentials({ discord_access_token, discord_refresh_token, discord_expires_at }: UserDataI) {
     const { DB, discord_user_id } = this;
-    console.log(discord_access_token, discord_refresh_token, discord_expires_at);
+    const user = await User.findOne('discord_user_id', discord_user_id, DB);
+    await User.update(
+      {
+        ...user,
+        discord_access_token,
+        discord_refresh_token,
+        discord_expires_at
+      },
+      DB
+    );
+    return await this.build();
   }
 
   async addStellarAccount({ public_key }: any) {
