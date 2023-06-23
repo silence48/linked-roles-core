@@ -76,7 +76,7 @@ const schema = [
 
 const seeds = [
   `
-  INSERT INTO users (id, discord_user_id, discord_access_token, discord_refresh_token, discord_expires_at) VALUES ('c2b6-43d6-9eba-a5c72090-2dfef25b284a', 'c2b6-43d6-9eba-a5c72090-2dfef25b284a', 'c2b6-43d6-9eba-a5c72090-2dfef25b284a', 'c2b6-43d6-9eba-a5c72090-2dfef25b284a', '0000000000' );`
+  INSERT INTO users (id, discord_user_id, discord_access_token, discord_refresh_token, discord_expires_at) VALUES ('c2b6-43d6-9eba-a5c72090-2dfef25b284a', 'a5c72090-2dfef25b284a-c2b6-43d6-9eba', 'c2b6-43d6-9eba-a5c72090-2dfef25b284a', 'c2b6-43d6-9eba-a5c72090-2dfef25b284a', '0000000000' );`
 ];
 
 export const database = [...schema, ...seeds];
