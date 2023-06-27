@@ -1,9 +1,9 @@
 export declare class Discord {
-    static getOAuthUrl(env: any): Promise<{
+    static getOAuthUrl(request: any, env: any): Promise<{
         state: string;
         url: string;
     }>;
-    static getOAuthTokens(code: string, env: any): Promise<any>;
+    static getOAuthTokens(request: any, code: string, env: any): Promise<any>;
     static getUserData(tokens: any): Promise<any>;
     /**
      * @typedef DiscordRoleMetaData
