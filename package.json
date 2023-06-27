@@ -1,7 +1,7 @@
 {
   "name": "linked-roles-core",
   "description": "core components for communi web",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "repository": {
@@ -10,7 +10,8 @@
   },
   "author": "Julian Clatro <hola@julianclatro.com> (https://communidao.cc)",
   "contributors": [
-    "Julian Clatro <hola@julianclatro.com> (https://communidao.cc)"
+    "Julian Clatro <hola@julianclatro.com> (https://communidao.cc)",
+    "Silence <35656692+silence48@users.noreply.github.com> (https://communidao.cc)"
   ],
   "license": "MIT",
   "scripts": {

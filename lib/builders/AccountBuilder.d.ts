@@ -1,11 +1,30 @@
 import type { UserDataI } from '../interfaces/types';
+export interface AccountBuilder {
+    discord_user_id: string;
+    data: any;
+    DB: any;
+    setup(user: UserDataI): Promise<void>;
+    build(): Promise<void>;
+    updateDiscordCredentials(credentials: UserDataI): Promise<void>;
+    addStellarAccount(account: {
+        public_key: string;
+        access_token: string;
+        refresh_token: string;
+    }): Promise<void>;
+    removeStellarAccount(account: {
+        public_key: string;
+    }): Promise<void>;
+    getStellarAccounts(): Promise<{
+        accounts: any[];
+    }>;
+}
 interface AccountBuilderData {
     discord_user_id?: string;
     data?: any;
     DB: any;
 }
 export declare class AccountBuilder {
-    readonly DB: any;
+    DB: any;
     data: any;
     discord_user_id: string;
     constructor({ discord_user_id, DB }: AccountBuilderData);
@@ -17,13 +36,5 @@ export declare class AccountBuilder {
         discord_user_id: string;
         DB: any;
     }): Promise<AccountBuilder>;
-    setup(user: UserDataI): Promise<void>;
-    private build;
-    updateDiscordCredentials({ discord_access_token, discord_refresh_token, discord_expires_at }: UserDataI): Promise<void>;
-    addStellarAccount({ public_key }: any): Promise<void>;
-    removeStellarAccount({ public_key }: any): Promise<void>;
-    getStellarAccounts(): Promise<{
-        accounts: any;
-    }>;
 }
 export {};
