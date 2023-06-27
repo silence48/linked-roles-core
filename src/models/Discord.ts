@@ -5,9 +5,10 @@ export class Discord {
   static async getOAuthUrl(request: any, env: any) {
     const state = crypto.randomUUID();
     const url = new URL('https://discord.com/api/oauth2/authorize');
+
     const requestUrl = new URL(request.url);
     const redirect_uri = `${requestUrl.origin}/auth/discord/callback`;
-
+    
     url.searchParams.set('client_id', env.DISCORD_CLIENT_ID);
     url.searchParams.set('redirect_uri', redirect_uri);
     url.searchParams.set('response_type', 'code');
@@ -25,7 +26,7 @@ export class Discord {
     const url = 'https://discord.com/api/v10/oauth2/token';
     const requestUrl = new URL(request.url);
     const redirect_uri = `${requestUrl.origin}/auth/discord/callback`;
-
+    
     const data = new URLSearchParams({
       client_id: env.DISCORD_CLIENT_ID,
       client_secret: env.DISCORD_CLIENT_SECRET,
