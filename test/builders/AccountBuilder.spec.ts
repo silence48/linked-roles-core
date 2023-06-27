@@ -49,8 +49,8 @@ test('Add multiple stellar accounts to user', async (t) => {
     discord_expires_at: (Date.now() * 1000).toString()
   };
   const account = await AccountBuilder.create({ user, DB });
-  await account.addStellarAccount({ public_key: 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S' });
-  await account.addStellarAccount({ public_key: 'GCAB2OXZQLVA7WFLVPO72QSJGHBR6VU5P7SKESI7L7VPMU46GT5UNU5C' });
+  await account.addStellarAccount({ public_key: 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S', access_token: 'access_token', refresh_token: 'refresh_token' });
+  await account.addStellarAccount({ public_key: 'GCAB2OXZQLVA7WFLVPO72QSJGHBR6VU5P7SKESI7L7VPMU46GT5UNU5C', access_token: 'access_token', refresh_token: 'refresh_token' });
 
   t.assert(
     account.data.accounts[0].public_key === 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S' &&
@@ -67,8 +67,8 @@ test('Prevent duplicate stellar accounts', async (t) => {
     discord_expires_at: (Date.now() * 1000).toString()
   };
   const account = await AccountBuilder.create({ user, DB });
-  await account.addStellarAccount({ public_key: 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S' });
-  await account.addStellarAccount({ public_key: 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S' });
+  await account.addStellarAccount({ public_key: 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S', access_token: 'access_token', refresh_token: 'refresh_token' });
+  await account.addStellarAccount({ public_key: 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S', access_token: 'access_token', refresh_token: 'refresh_token' });
 
   t.assert(account.data.accounts[1] === undefined);
 });
@@ -82,8 +82,8 @@ test('Add and remove stellar accounts', async (t) => {
     discord_expires_at: (Date.now() * 1000).toString()
   };
   const account = await AccountBuilder.create({ user, DB });
-  await account.addStellarAccount({ public_key: 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S' });
-  await account.addStellarAccount({ public_key: 'GCAB2OXZQLVA7WFLVPO72QSJGHBR6VU5P7SKESI7L7VPMU46GT5UNU5C' });
+  await account.addStellarAccount({ public_key: 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S', access_token: 'access_token', refresh_token: 'refresh_token' });
+  await account.addStellarAccount({ public_key: 'GCAB2OXZQLVA7WFLVPO72QSJGHBR6VU5P7SKESI7L7VPMU46GT5UNU5C', access_token: 'access_token', refresh_token: 'refresh_token' });
   await account.removeStellarAccount({ public_key: 'GBUIWSE7CLGBSMGBBXRJPOGYV3RSYPXSO2MPJGQZSR7QRN2YJWC4HP3S' });
 
   t.assert(
